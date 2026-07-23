@@ -15,6 +15,8 @@ All 19 marketing HTML pages checked for canonical / robots / JSON-LD / OG.
 - **Pass 4** — Added `FAQPage` JSON-LD to the 4 service pages: spf-roofing, concrete, soil-stabilization, seawall-stabilization (all validated). Remaining: 10 city pages.
 - **Pass 5** — Added `FAQPage` JSON-LD to ALL 10 city pages (script-generated from each page's own visible FAQ, validated). ✅ FAQ schema now complete site-wide: 17 FAQPage blocks, all valid JSON.
 
+- **Pass 6** — FINISHED HOMEPAGE LINKING (it was a dead end — only concrete was linked). Linked the Spray Foam + SPF Roofing service cards, added a "More specialties" row (pole barn, metal building, soil, seawall, spec), made all service-area chips clickable to their city pages, and linked the footer services list. All 18 homepage links verified to resolve. Homepage now connects to every service + city page (UX + internal-link SEO).
+
 ## Backlog (safe, additive — for later passes)
 - Add breadcrumb JSON-LD (BreadcrumbList) to service pages (marginal on a flat URL structure — low priority).
 - Add 1–2 more distinct FAQ entries to city pages (currently 3 each) — only if genuinely non-duplicative.
