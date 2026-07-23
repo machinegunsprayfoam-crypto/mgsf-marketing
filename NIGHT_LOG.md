@@ -20,6 +20,7 @@ All 19 marketing HTML pages checked for canonical / robots / JSON-LD / OG.
 - **Pass 7** — InfraNodus retry: connector DOWN (not just rate-limited) — noted, stopped. Sitemap QA: complete (19 loc = 19 pages). Added `BreadcrumbList` JSON-LD to all 18 interior pages (Home > Page), script-generated + validated. Structured-data set now complete site-wide (GeneralContractor + FAQPage + BreadcrumbList).
 - **Pass 8** — Fixed homepage og:image + schema image from relative (`img/foam-hero.jpg`) to absolute URL (relative paths break social/scraper previews). All other pages already absolute. Pricing + review link left untouched (owner-hold).
 - **Pass 9** — Added Twitter/X Card meta (summary_large_image + title/description/image from OG) to all 19 pages so links render a large-image preview on X. Caught + fixed a script bug in the same pass (missing `>` on og:image / stray `>` after twitter:image) — all tags well-formed, JSON-LD re-validated.
+- **Pass 10** — Read-only full QA sweep: all 19 pages pass (canonical 1, robots index 1, og:image 1, twitter:card 1, JSON-LD all valid); git tree clean. Site is structurally complete — **idling** further passes to avoid low-value churn. Remaining work is owner-input (Terra-Lok $2,800 confirm, review link g.pe→g.page, merge to main, Search Console) or the InfraNodus mirror (needs a live connected session).
 
 ## Backlog (safe, additive — for later passes)
 - Add 1–2 more distinct FAQ entries to city pages (currently 3 each) — only if genuinely non-duplicative.
