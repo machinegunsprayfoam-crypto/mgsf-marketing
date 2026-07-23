@@ -13,9 +13,11 @@ All 19 marketing HTML pages checked for canonical / robots / JSON-LD / OG.
 - **Pass 2** — Verified all 9 internal nav targets resolve (no broken links). Added a full service-nav footer to `concrete.html` (it had none) — cross-links soil/seawall + all services.
 - **Pass 3** — Added `FAQPage` JSON-LD to `spray-foam-insulation.html` (flagship) mirroring its 4 visible FAQ items (validated). 14 more pages have visible FAQs but no FAQPage schema — see backlog.
 - **Pass 4** — Added `FAQPage` JSON-LD to the 4 service pages: spf-roofing, concrete, soil-stabilization, seawall-stabilization (all validated). Remaining: 10 city pages.
+- **Pass 5** — Added `FAQPage` JSON-LD to ALL 10 city pages (script-generated from each page's own visible FAQ, validated). ✅ FAQ schema now complete site-wide: 17 FAQPage blocks, all valid JSON.
 
 ## Backlog (safe, additive — for later passes)
-- Add `FAQPage` JSON-LD to the remaining 10 city pages (each has 3 visible FAQs). A few per pass.
+- Add breadcrumb JSON-LD (BreadcrumbList) to service pages (marginal on a flat URL structure — low priority).
+- Add 1–2 more distinct FAQ entries to city pages (currently 3 each) — only if genuinely non-duplicative.
 - Add breadcrumb JSON-LD (BreadcrumbList) to service pages.
 - Add 1–2 more FAQ entries to city pages (currently 3 each).
 - ~~Cross-link soil/seawall from the concrete page~~ (done, pass 2).
