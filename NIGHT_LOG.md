@@ -36,3 +36,5 @@ All 19 marketing HTML pages checked for canonical / robots / JSON-LD / OG.
 - Pricing / Terra-Lok rate.
 - `g.pe` vs `g.page` review link (flagged mismatch).
 - Any merge to `main`.
+
+- **Pass 12** — Internal-linking fix: concrete.html was the only interior page with no home link in its nav (home:0 vs home:1 everywhere else). Added a "Home" link (`/`) matching sibling nav style. All 18 interior pages now link home. (Noted for owner: 6 service pages lack a "Free Estimate" CTA that city pages have — SEO_GAPS P2, left for review.)
