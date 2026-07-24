@@ -38,3 +38,5 @@ All 19 marketing HTML pages checked for canonical / robots / JSON-LD / OG.
 - Any merge to `main`.
 
 - **Pass 12** — Internal-linking fix: concrete.html was the only interior page with no home link in its nav (home:0 vs home:1 everywhere else). Added a "Home" link (`/`) matching sibling nav style. All 18 interior pages now link home. (Noted for owner: 6 service pages lack a "Free Estimate" CTA that city pages have — SEO_GAPS P2, left for review.)
+
+- **Pass 13** — CTA consistency: seawall + soil closing CTAs said "Get a [service] assessment" while sibling service pages say "Get a *free* [service] assessment." Added "free" to both to match the site pattern (free assessment is MGSF's established offer across 14 pages). spec page left as-is (builder/spec audience, intentionally different). SEO_GAPS P2 now effectively closed — all homeowner-facing pages carry a free-offer CTA.
