@@ -35,6 +35,8 @@ h1,h2,h3{color:var(--navy);font-weight:800;line-height:1.12;letter-spacing:-.01e
 header{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 6px rgba(15,23,32,.04)}
 .bar{display:flex;align-items:center;justify-content:space-between;height:76px;gap:16px}
 .logo{display:flex;align-items:center;gap:12px}
+.logo .logoimg{height:60px;width:auto;background:#000;border-radius:10px;padding:6px 10px;display:block}
+@media(max-width:560px){.logo .logoimg{height:48px}}
 .logo .badge{width:46px;height:46px;border-radius:50%;border:2px solid var(--navy);display:flex;align-items:center;justify-content:center;color:var(--navy);font-weight:900;font-size:18px;flex:none}
 .logo .name{line-height:1.05}
 .logo .name b{display:block;font-size:17px;font-weight:900;color:var(--navy);letter-spacing:.01em}
