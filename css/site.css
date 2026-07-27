@@ -37,10 +37,10 @@ h1,h2,h3{color:var(--head);font-weight:800;line-height:1.12;letter-spacing:-.01e
 .util a:hover{color:#fff}
 .util .ic{color:var(--red)}
 /* header */
-header{position:sticky;top:0;z-index:30;background:#0f1720;border-bottom:1px solid var(--line);box-shadow:0 1px 8px rgba(0,0,0,.5)}
+header{position:sticky;top:0;z-index:30;background:#000;border-bottom:1px solid var(--line);box-shadow:0 1px 8px rgba(0,0,0,.5)}
 .bar{display:flex;align-items:center;justify-content:space-between;height:76px;gap:16px}
 .logo{display:flex;align-items:center;gap:12px}
-.logo .logoimg{height:60px;width:auto;display:block;background:#fff;border-radius:10px;padding:5px}
+.logo .logoimg{height:58px;width:auto;display:block}
 @media(max-width:560px){.logo .logoimg{height:48px}}
 .logo .badge{width:46px;height:46px;border-radius:50%;border:2px solid var(--red);display:flex;align-items:center;justify-content:center;color:var(--red);font-weight:900;font-size:18px;flex:none}
 .logo .name{line-height:1.05}
