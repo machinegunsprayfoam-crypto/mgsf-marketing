@@ -1,3 +1,13 @@
+> ## 🌙 Latest — overnight 2026-07-27 (while you slept)
+> **field-os is DEPLOYED & live** (you approved): 3D brain-graph boot screen, GraphRAG brain, live-data grounding, warranty button — all live; smoke test `/api/brain-context` = configured, reading real KV (12 open leads, **11 cold >7d**). Prod health: 0 real errors.
+> **Gated** the read endpoints (`/api/command-center`, `/api/brain-context`) behind CREW_CODE + redeployed — **BUT CREW_CODE isn't set in Vercel yet, so they're still open. Set it to lock them + the AI.**
+> **⚠ AI budget at 86%** ($42.91/$50) — Klyfton auto-throttled to battery mode. Raise `KLYFTON_MONTHLY_BUDGET_USD` for full power.
+> **Overnight schedule is live** — 3 fires/night (~1/3/5am MT, Mon–Sat), local-tools-only, stages work on the branch.
+> **Redesign proof:** `spf-roofing.html` converted to the new light theme (staged) — **approve the look** and I'll roll it to the other 18 pages.
+> **Still your call:** marketing deploy (placeholder reviews), g.pe→g.page, business hours, favicon logo, budget bump, CREW_CODE.
+
+---
+
 # ☀️ Morning Review — overnight work digest
 
 _Branch: `claude/klyfton-ai-problems-ynhx9f` (both repos) · nothing merged to main · full detail in NIGHT_LOG.md_
