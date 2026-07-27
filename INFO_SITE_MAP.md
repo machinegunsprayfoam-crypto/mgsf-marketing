@@ -21,7 +21,7 @@ Contact facts confirmed on-site: **Cliff Behner, Owner · (406) 939-8301 · (605
 
 **Still missing on .net (build backlog, in priority order):**
 1. Photos / Video Gallery page (needs real job photos as web assets — not the .info screenshots)
-2. Types of Spray Foam (open vs closed cell, densities, R-3.5 / R-6) — screenshot IMG_0092
+2. ~~Types of Spray Foam~~ ✅ BUILT (Pass 84) — /types-of-spray-foam
 3. Attic Insulation
 4. Ice Dam Prevention
 5. Building Envelope — screenshot IMG_0102
