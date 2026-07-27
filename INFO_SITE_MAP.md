@@ -27,7 +27,7 @@ Contact facts confirmed on-site: **Cliff Behner, Owner · (406) 939-8301 · (605
 5. ~~Building Envelope~~ ✅ BUILT (Pass 85) — /building-envelope
 6. ~~Spray Foam Strengthens Walls~~ ✅ BUILT (Pass 85) — /spray-foam-strengthens-walls
 7. Rebates (Drive has a "Rebates page replacement" draft)
-8. Terms & Conditions
+8. ~~Terms & Conditions~~ ✅ BUILT (Pass 86) — /terms (noindex)
 
 ## HARD constraint when porting .info copy
 The .info Spray Foam Insulation page claims foam protects "your family's health from **dangerous
