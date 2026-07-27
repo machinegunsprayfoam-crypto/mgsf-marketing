@@ -22,10 +22,10 @@ Contact facts confirmed on-site: **Cliff Behner, Owner · (406) 939-8301 · (605
 **Still missing on .net (build backlog, in priority order):**
 1. Photos / Video Gallery page (needs real job photos as web assets — not the .info screenshots)
 2. ~~Types of Spray Foam~~ ✅ BUILT (Pass 84) — /types-of-spray-foam
-3. Attic Insulation
-4. Ice Dam Prevention
-5. Building Envelope — screenshot IMG_0102
-6. Spray Foam Strengthens Walls
+3. ~~Attic Insulation~~ ✅ BUILT (Pass 85) — /attic-insulation
+4. ~~Ice Dam Prevention~~ ✅ BUILT (Pass 85) — /ice-dam-prevention
+5. ~~Building Envelope~~ ✅ BUILT (Pass 85) — /building-envelope
+6. ~~Spray Foam Strengthens Walls~~ ✅ BUILT (Pass 85) — /spray-foam-strengthens-walls
 7. Rebates (Drive has a "Rebates page replacement" draft)
 8. Terms & Conditions
 
