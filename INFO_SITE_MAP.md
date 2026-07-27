@@ -26,7 +26,7 @@ Contact facts confirmed on-site: **Cliff Behner, Owner · (406) 939-8301 · (605
 4. ~~Ice Dam Prevention~~ ✅ BUILT (Pass 85) — /ice-dam-prevention
 5. ~~Building Envelope~~ ✅ BUILT (Pass 85) — /building-envelope
 6. ~~Spray Foam Strengthens Walls~~ ✅ BUILT (Pass 85) — /spray-foam-strengthens-walls
-7. Rebates (Drive has a "Rebates page replacement" draft)
+7. ~~Rebates~~ ✅ BUILT (Pass 93) — /rebates (real programs, cited; 25C shown as ended; no fabricated $)
 8. ~~Terms & Conditions~~ ✅ BUILT (Pass 86) — /terms (noindex)
 
 ## HARD constraint when porting .info copy
