@@ -171,3 +171,9 @@ footer a:hover{color:#fff}
   .util .wrap{gap:14px;font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+.crumbs{background:var(--dark);border-bottom:1px solid var(--line);font-size:13px}
+.crumbs .wrap{padding-top:10px;padding-bottom:10px}
+.crumbs a{color:var(--muted);text-decoration:none}
+.crumbs a:hover{color:var(--gold)}
+.crumbs .sep{margin:0 8px;color:var(--line)}
+.crumbs [aria-current]{color:var(--ink);font-weight:600}
