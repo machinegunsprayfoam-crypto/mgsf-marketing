@@ -1,5 +1,13 @@
 # .info site map & .net gap tracker
 
+> **STATUS (2026-07-30, Pass 171): historical migration tracker — migration COMPLETE.**
+> This doc tracked porting the old `machinegunsprayfoam.info` site into the new build during Passes
+> 75–93. That build is finished and has since moved to **`.com`** in one dark tactical theme. Every
+> page in the "still missing" backlog below is built **except the Photos/Video Gallery**, which is
+> owner-gated on Cloudinary + real job photos. For the current, authoritative status use
+> **`TODO.md`** and **`MORNING_REVIEW.md`** — treat everything below as a historical snapshot (the
+> `.net` framing is superseded by `.com`). The mold/health-claim guardrail in this file still stands.
+
 Source: 100 screenshots of the live **machinegunsprayfoam.info** site (Clifton's phone walk-through),
 loose in the Google Drive folder "Machine Gun Spray Foam & Concrete Lifting LLC"
 (`IMG_0050` + `IMG_0054`–`IMG_0152`, uploaded 2026-07-27). Sampled ~9 to map structure;
