@@ -43,3 +43,24 @@ python3 tools/qa_check.py        # confirm the site is clean
 
 Both scripts are plain Python 3 with no third-party dependencies, so they run
 anywhere Python 3 is available (local shell or a CI runner).
+
+## `verify_all.sh` — one-command pre-push check
+
+Runs the sitemap-drift check + the QA gate together and reports one result.
+
+```bash
+bash tools/verify_all.sh      # exit 0 only if everything is clean — gate commits/deploys on it
+```
+
+## `faq_gen.py` — matched FAQ generator (kills schema drift)
+
+Emits the visible `<details>` HTML **and** the FAQPage JSON-LD from ONE list of Q&A
+pairs, so they can't disagree (Google needs them identical after tag-strip +
+entity-decode). Visible gets `&amp;`, JSON-LD gets raw `&` — they normalize equal.
+
+```bash
+python3 tools/faq_gen.py faqs.json      # faqs.json = [{"q":"…","a":"…"}, …]
+echo '[{"q":"…","a":"…"}]' | python3 tools/faq_gen.py -
+```
+Paste each block into the page, then confirm with `python3 tools/qa_check.py`. The tool
+formats claim-safe answers you supply — it does not invent numbers/claims.
