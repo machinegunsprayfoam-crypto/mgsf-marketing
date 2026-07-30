@@ -1,6 +1,6 @@
 # ☀️ Morning Review — overnight work digest
 
-_Branch: `claude/klyfton-ai-problems-ynhx9f` (both repos) · nothing merged to main · per-pass detail in NIGHT_LOG.md · current through Pass 124_
+_Branch: `claude/klyfton-ai-problems-ynhx9f` (both repos) · nothing merged to main · per-pass detail in NIGHT_LOG.md · current through Pass 160_
 
 **TL;DR:** The marketing site is fully rebuilt for **`.com`** in your **dark tactical, USMC scarlet & gold**
 look (no navy), with your real black-background logo on the header. All the new `.com` copy-deck pages are
@@ -33,12 +33,28 @@ built, the whole Foam Roofing sub-cluster exists, and every SEO/QA dimension is 
 - **Financing = Hearth** (live widget on Financing + $0-down blocks).
 
 ### SEO / QA — clean across the board
-- **108 JSON-LD blocks / 0 invalid, 0 broken links, 0 orphan pages.**
+- **110 JSON-LD blocks / 0 invalid, 0 broken links, 0 orphan pages.**
 - Self-referential canonicals + `index,follow` robots (privacy/terms/404 correctly noindex/excluded).
 - Sitemap complete (37 indexable = 37 `<loc>`) with accurate per-page `lastmod` (real git dates).
-- FAQ + FAQPage schema on homepage, all 6 roofing sub-pages, and Service Areas — schema matches visible text.
+- FAQ + FAQPage schema on homepage, About, Contact, all 6 roofing sub-pages, Service Areas, and the
+  insulation/service pages — every FAQPage's schema matches its visible text (audited site-wide).
 - Breadcrumb JSON-LD on every sub-page; exactly one H1 per page; 100% image alt-text; meta descriptions ≤160
   and all unique; all titles unique; OG/Twitter complete; HTTPS-only; viewport on every page.
+
+### Since the last review (Passes 125–160) — polish, all staged
+- **Internal linking fully wired:** every indexable page now links the **Service Areas** hub, **Contact**, and
+  **Financing**; pillar↔sub-page and sibling links complete; city pages link the hub; homepage footer now
+  carries the company/legal row.
+- **Visible breadcrumbs** added to all 28 sub/service pages (roofing, insulation, city, concrete/soil/seawall) —
+  matching their JSON-LD; city pages upgraded to a 3-level `Home › Service Areas › City` trail.
+- **FAQ depth raised:** About + Contact got grounded FAQs; every roofing sub-page now has 3 (added honest,
+  non-numeric answers on cold-climate value, silicone-vs-acrylic, re-roof-over-existing, hail, roof weight,
+  energy use — no guarantees, no fabricated numbers).
+- **Legal footers consistent:** Privacy **and** Terms now linked from **every** page (was only a handful).
+- **Concrete claim softened:** the old "about half the cost" was changed to the non-numeric "a fraction of the
+  cost" everywhere on that page (doctrine: never fabricate numbers).
+- **Tooling:** added `tools/sync_sitemap.py` (dependency-free; `--check` mode for CI) so sitemap `lastmod`
+  stays honest automatically instead of a manual pass.
 
 ---
 
