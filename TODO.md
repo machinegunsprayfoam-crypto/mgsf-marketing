@@ -1,50 +1,67 @@
 # MGSF — What's Left (to-do)
 
-_As of 2026-07-27, Pass 93. Branch `claude/klyfton-ai-problems-ynhx9f`, both repos. Nothing merged to main._
-
-## 🟢 I can do — no blockers (just say go)
-- [ ] **Redesign rollout** — convert the ~19 old-theme pages (9 service + 10 city) to the new light
-      theme to match the homepage. Big job; I keep every page's content/schema/FAQ/links intact.
-- [ ] **Local-SEO prep pack** — I draft a NAP citation sheet (Google, Bing, Apple, Yelp, Angi, BBB,
-      chamber, VOSB/SDVOSB dirs) + a Google Business Profile weekly-post plan. You submit/post.
-- [ ] **More content** — additional FAQs, service detail, or blog-style pages if you want them.
+_As of 2026-07-30, Pass 169. Branch `claude/klyfton-ai-problems-ynhx9f`, both repos. Nothing merged to
+main. Site is now **`.com`**, one **dark tactical (scarlet & gold)** theme, 40 pages, QA-clean._
 
 ## 🔴 Needs YOU — authorize a login (the money moves)
-- [ ] **Twilio** → turns speed-to-lead (missed-call text-back) fully live. #1 ROI; code built + tested.
+- [ ] **Twilio** → turns speed-to-lead (missed-call text-back) fully live. #1 ROI; code built + tested (`GO_LIVE.md`).
 - [ ] **Cloudinary** → so I can build the **Photo/Video Gallery** page with your real job photos.
 - [ ] **Stripe or PayPal** → take deposits/payments on jobs.
 - [ ] **QuickBooks** → reconnect the lapsed subscription to resume accounting automation.
-- [ ] **Semrush units** (or Ahrefs paid/free API key) → I pull the full keyword + competitor report.
+- [ ] **Semrush units** (or a free/paid Ahrefs API key) → I pull the full keyword + competitor report.
+      _(Per `SEO_FINDINGS.md`: unauthenticated Ahrefs free-DR access was set to end 2026-08-10.)_
 
-## 🟡 Needs YOU — a decision
-- [ ] **Merge to main** — deploys both repos (Vercel). Everything staged is inert until you do.
-- [ ] **Pick ONE canonical domain** (`.net` vs `.info`) and 301-redirect the other — stops splitting
-      Google authority (both currently near-zero DR).
+## 🔴 Go-live — a decision only you can make
+- [ ] **Point `.com` live** — set `www.machinegunsprayfoam.com` as the Vercel primary domain + DNS.
+- [ ] **Merge to main** — everything is staged on `claude/klyfton-ai-problems-ynhx9f`; inert until you merge.
 - [ ] **`g.pe` → `g.page`** review link — flagged; I won't touch it without your OK.
-- [ ] **Set `CREW_CODE`** in Vercel → actually locks the Klyfton read endpoints + AI to your crew.
+- [ ] **Set `CREW_CODE`** in Vercel → locks the Klyfton read endpoints + AI to your crew.
 - [ ] **`KLYFTON_MONTHLY_BUDGET_USD`** → raise it to take the AI out of battery/throttle mode.
-- [ ] **Approve the new look** (or just tell me to roll it) before the 19-page redesign.
 
 ## 🟡 Needs YOU — info only you have
-- [ ] **Real Google reviews** — paste them; homepage cards are placeholder until then (I won't fabricate).
+- [ ] **Contractor registration #** (from Talia/ProTax) → I'll add a "Registered Montana Contractor #___" credential.
+- [ ] **North Dakota phone number** → I'll wire it into the ND city pages like MT/WY/SD.
+- [ ] **Real Google reviews** — paste them; the site shows none (I won't fabricate).
 - [ ] **Attorney review** of the Privacy + Terms pages before they go public (both noindex now).
-- [ ] **Business hours** — confirm; then I add `openingHours` schema + a footer hours line site-wide.
-- [ ] **Favicon** — your logo file (image tooling isn't available to the overnight cron).
+- [ ] **Job photos** → for a real gallery (pages currently share the hero image).
+- [ ] **Square favicon** — a 512×512 PNG (+ optional `favicon.ico`). The tab icon currently uses your
+      real wide logo (`img/logo-dark.jpg`); a square version renders sharper. Image tooling isn't
+      available in the overnight cron.
 - [ ] **Hero-photo compression** — the hero JPGs are heavy; needs image tooling I can't run in cron.
-- [ ] **Rebates** — the page is built with real cited programs; confirm/refresh specifics periodically
-      (terms change) — no action needed unless a program changes.
 
-## ✅ Recently finished (staged, for reference)
-Full `.net` site (33 pages) built + interlinked + SEO-clean · About/Contact/Coatings/Financing/Privacy/
-Terms/Rebates + insulation cluster (Types/Attic/Ice-Dam/Building-Envelope/Strengthens-Walls) · branded
-email · FAQ schema synced · speed-to-lead hardened + documented (`GO_LIVE.md`) · AI market scan
-(`AI_MARKET_SCAN.md`) · connections audit (`CONNECTIONS.md`) · SEO findings (`SEO_FINDINGS.md`) ·
-GovCon scan (no in-region bids) · morning digest refreshed (`MORNING_REVIEW.md`).
+## 🟢 One decision for you
+- [ ] **Title tags:** 37 pages have `<title>`s over ~60 chars (Google truncates the tail). Say the word
+      and I'll trim them, keeping the front-loaded keywords.
+
+## 🟢 I can do — no blockers (just say go)
+- [ ] **Local-SEO prep pack** — NAP citation sheet (Google, Bing, Apple, Yelp, Angi, BBB, chamber,
+      VOSB/SDVOSB dirs) + a Google Business Profile weekly-post plan. You submit/post.
+- [ ] **More content** — additional service detail or blog-style pages if you want them.
+- [ ] **Build the gallery page** once Cloudinary + photos are available.
+
+## ✅ Done & staged (for reference — see NIGHT_LOG.md for per-pass detail)
+- **`.com` rebuild** in one **dark tactical (USMC scarlet #c8102e + gold #e8a317)** theme, real
+  black-background logo, favicon + apple-touch-icon site-wide. (The old light/navy theme and the
+  `.net`-vs-`.info` domain question are obsolete — resolved to one dark `.com`.)
+- Full copy deck across all core pages + the **Foam Roofing sub-cluster (6 pages)** and the
+  **insulation cluster** (Types/Attic/Ice-Dam/Building-Envelope/Strengthens-Walls).
+- **Crawl Space Encapsulation** page exists (was the P1 gap in `SEO_GAPS.md` — now built).
+- **Internal linking** complete: every page links the Service Areas hub, Contact, and Financing;
+  visible breadcrumbs on all 28 sub/service pages; Privacy + Terms in every footer.
+- **FAQ + FAQPage schema** on homepage, About, Contact, all roofing subs, Service Areas, and the
+  insulation/service pages — schema matches visible text (audited site-wide).
+- **SEO/QA clean:** 110 JSON-LD / 0 invalid, 0 broken links, self-referential canonicals + robots,
+  sitemap synced (real git `lastmod`), unique titles/meta, 100% alt, HTTPS-only.
+- **Insurance** shown as **"Fully Insured"** ($1M GL + MT workers' comp, from your ACORD COI);
+  **Financing = Hearth**; **state numbers** MT/WY/SD wired (no ND yet).
+- **Tooling:** `tools/qa_check.py` (pre-deploy QA gate) + `tools/sync_sitemap.py` (lastmod sync),
+  documented in `tools/README.md`.
+- **Field-os:** speed-to-lead hardened + documented (`GO_LIVE.md`); Klyfton brain parses clean.
 
 ---
 ## Recommended order (my pick)
-1. **Merge to main** (get the live site + Klyfton improvements out).
-2. **Twilio** (speed-to-lead — the money leak).
-3. **GBP + reviews + citations** (biggest local-SEO lever; both domains at ~0 authority).
-4. **Pick canonical domain + 301.**
-5. Tell me **"go"** on the redesign rollout + **Cloudinary** for the gallery.
+1. **Merge to main** + **point `.com` live** — get the site out.
+2. **Twilio** — speed-to-lead (the money leak).
+3. **GBP + reviews + citations** — biggest local-SEO lever (DR near 0; see `SEO_FINDINGS.md`).
+4. **Cloudinary + job photos** → gallery page.
+5. Send me the **contractor reg #** and **ND number** to finish those credentials.
