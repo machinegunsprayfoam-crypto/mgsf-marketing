@@ -73,6 +73,19 @@ function token() {
 }
 function isConfigured() { return !!token(); }
 
+// GET returns a presence-only config check (NEVER the token value) so the wiring can be
+// verified from a browser or a server-side fetch without exposing the secret. If this
+// reports configured:false after you set the var, the var name is wrong (must be exactly
+// HUBSPOT_TOKEN) or a redeploy hasn't happened yet.
+function diagnostic() {
+  return {
+    ok: true,
+    service: "website-intake",
+    configured: isConfigured(),
+    submit: "POST JSON: name, phone, town, service, message",
+  };
+}
+
 async function createHubspotContact(props) {
   var resp = await fetch("https://api.hubapi.com/crm/v3/objects/contacts", {
     method: "POST",
@@ -91,7 +104,8 @@ async function createHubspotContact(props) {
 module.exports = async (req, res) => {
   try {
     res.setHeader("Cache-Control", "no-store");
-    if (req.method === "OPTIONS") { res.setHeader("Allow", "POST, OPTIONS"); return res.status(204).end(); }
+    if (req.method === "OPTIONS") { res.setHeader("Allow", "GET, POST, OPTIONS"); return res.status(204).end(); }
+    if (req.method === "GET") return res.status(200).json(diagnostic());
     if (req.method !== "POST") return res.status(405).json({ ok: false, reason: "method_not_allowed" });
 
     var body = req.body;
@@ -121,4 +135,5 @@ module.exports.parseTown = parseTown;
 module.exports.validateIntake = validateIntake;
 module.exports.buildContactProperties = buildContactProperties;
 module.exports.isConfigured = isConfigured;
+module.exports.diagnostic = diagnostic;
 module.exports._LIMITS = LIMITS;

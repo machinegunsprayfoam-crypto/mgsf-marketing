@@ -51,6 +51,20 @@ ok("isConfigured false without token", (() => {
   return r === false;
 })());
 
+// ---- GET diagnostic: presence-only, never leaks the token value ----
+(() => {
+  const t = process.env.HUBSPOT_TOKEN, k = process.env.HUBSPOT_API_KEY;
+  delete process.env.HUBSPOT_TOKEN; delete process.env.HUBSPOT_API_KEY;
+  const off = I.diagnostic();
+  process.env.HUBSPOT_TOKEN = "pat-na1-secret";
+  const on = I.diagnostic();
+  if (t !== undefined) process.env.HUBSPOT_TOKEN = t; else delete process.env.HUBSPOT_TOKEN;
+  if (k !== undefined) process.env.HUBSPOT_API_KEY = k;
+  ok("diagnostic ok + configured=false without token", off.ok === true && off.configured === false);
+  ok("diagnostic configured=true with token", on.configured === true);
+  ok("diagnostic never includes the token value", JSON.stringify(on).indexOf("pat-na1-secret") === -1);
+})();
+
 // ---- length caps (defense) ----
 ok("message capped at limit", I.buildContactProperties({ name: "A B", phone: "4069398301", message: "x".repeat(5000) }).message.length <= I._LIMITS.message);
 
