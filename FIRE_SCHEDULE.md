@@ -67,6 +67,7 @@ does repo work; it never schedules business work/meetings/reminders).
 - [x] `measure.js` — ✅ Pass 194: covered the wall path + mode routing + clamps (+19 checks). calc-invariants had only the roof slope math. **Decision-logic track now complete** — remaining pure modules (foam-calc/coating-calc via calc-invariants; commission/payment-schedule/unit-convert via calc-money) are already covered; adding more would be padding.
 - Rule: read the module + its calc-invariants coverage; add a suite ONLY if decision/formula
   logic is uncovered (like dew-point Fire 6 / bpi-calc Fire 9). If already covered → N/A, idle.
+- [x] `ats.js` — ✅ Pass 195: covered the budget fuel→battery transfer thresholds + applyToPlan (+23 checks). Spend-control logic, previously untested. **Track now genuinely complete** — remaining pure modules are all covered; adding more is padding.
 
 > When the above are done/N-A the vetted local backlog is exhausted — **idle** and flag for an
 > interactive session to (a) refill from `GAP_AUDIT.md` / new needs, or (b) run the owner-gated
