@@ -64,7 +64,7 @@ does repo work; it never schedules business work/meetings/reminders).
 
 **Decision-logic test track (verify-needed each fire — only add if genuinely uncovered):**
 - [x] `roi.js` — ✅ Pass 193: covered the financing cash-flow decision + clamps (+21 checks). calc-invariants had only the identities.
-- [ ] `measure.js` — takeoff/measurement edge cases (check coverage first).
+- [x] `measure.js` — ✅ Pass 194: covered the wall path + mode routing + clamps (+19 checks). calc-invariants had only the roof slope math. **Decision-logic track now complete** — remaining pure modules (foam-calc/coating-calc via calc-invariants; commission/payment-schedule/unit-convert via calc-money) are already covered; adding more would be padding.
 - Rule: read the module + its calc-invariants coverage; add a suite ONLY if decision/formula
   logic is uncovered (like dew-point Fire 6 / bpi-calc Fire 9). If already covered → N/A, idle.
 
