@@ -60,6 +60,14 @@ does repo work; it never schedules business work/meetings/reminders).
   each page `<head>` (aids some crawlers/tools). *Why:* minor discoverability. *Check
   needed:* absent. *Done:* present on indexable pages; gate clean.
 
-> After Fire 8 the vetted local backlog is exhausted — **idle** and flag for an interactive
-> session to (a) refill from `GAP_AUDIT.md` / new needs, or (b) run the owner-gated items in
-> `TASK_PLANNER.md`. Do NOT invent padding work to stay busy.
+- [x] **Fire 9 — field-os: cover bpi-calc decision/formula logic** ✅ Pass 192 (tightness bands + ASHRAE 62.2 target + conversions; +19 checks). Found by re-checking: calc-invariants tested only the ACH50 identity, not the customer-facing decision logic — a real gap, not padding.
+
+**Decision-logic test track (verify-needed each fire — only add if genuinely uncovered):**
+- [ ] `roi.js` — payback / net-over-horizon decision logic (check vs calc-invariants first).
+- [ ] `measure.js` — takeoff/measurement edge cases (check coverage first).
+- Rule: read the module + its calc-invariants coverage; add a suite ONLY if decision/formula
+  logic is uncovered (like dew-point Fire 6 / bpi-calc Fire 9). If already covered → N/A, idle.
+
+> When the above are done/N-A the vetted local backlog is exhausted — **idle** and flag for an
+> interactive session to (a) refill from `GAP_AUDIT.md` / new needs, or (b) run the owner-gated
+> items in `TASK_PLANNER.md`. Do NOT invent padding work to stay busy.
