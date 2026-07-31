@@ -68,6 +68,14 @@ withCleanTokenEnv(() => {
   ok("diagnostic never includes the token value", JSON.stringify(on).indexOf("pat-na1-secret") === -1);
 });
 
+// ---- optional email mapping ----
+ok("valid email is set on the contact", I.buildContactProperties({ name: "A B", phone: "4069398301", email: "c@x.com" }).email === "c@x.com");
+ok("no email property when blank", I.buildContactProperties({ name: "A B", phone: "4069398301" }).email === undefined);
+ok("garbage email is not set (never fabricates a bad contact)", I.buildContactProperties({ name: "A B", phone: "4069398301", email: "not-an-email" }).email === undefined);
+ok("validEmail accepts a normal address", I.validEmail("Cliff@Machinegunsprayfoam.info") === "Cliff@Machinegunsprayfoam.info");
+ok("validEmail rejects missing @", I.validEmail("cliff.info") === "");
+ok("email absent ⇒ still a valid lead (email optional)", I.validateIntake({ name: "A B", phone: "4069398301" }).ok === true);
+
 // ---- length caps (defense) ----
 ok("message capped at limit", I.buildContactProperties({ name: "A B", phone: "4069398301", message: "x".repeat(5000) }).message.length <= I._LIMITS.message);
 
