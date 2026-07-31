@@ -56,7 +56,7 @@ does repo work; it never schedules business work/meetings/reminders).
   claims, no number changes). *Why:* maintainability. *Check needed:* a confusing block.
   *Done:* `node -c api/klyfton.js` parses; `doctrine_reconcile.py` still ✓ in sync.
 
-- [ ] **Fire 8 — Add `<link rel="sitemap" type="application/xml" href="/sitemap.xml">`** to
+- [~] **Fire 8 — Add `<link rel="sitemap" type="application/xml" href="/sitemap.xml">`** N/A (Pass 191) — SKIPPED as padding: `robots.txt` already declares the sitemap via the authoritative `Sitemap:` directive (what Google/Bing actually read); the `<link rel="sitemap">` head tag is ignored by major search engines. Touching 40 pages for ~zero value violates the no-padding rule. to
   each page `<head>` (aids some crawlers/tools). *Why:* minor discoverability. *Check
   needed:* absent. *Done:* present on indexable pages; gate clean.
 
