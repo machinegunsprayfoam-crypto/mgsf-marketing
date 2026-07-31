@@ -52,7 +52,7 @@ does repo work; it never schedules business work/meetings/reminders).
   `measure` edge cases beyond calc-invariants). *Why:* safety-relevant math regression net.
   *Check needed:* module's edge cases uncovered. *Done:* new tests green; `run-all.js` green.
 
-- [ ] **Fire 7 — field-os: clarify ONE Klyfton brain/DOCTRINE block** for readability (no new
+- [x] **Fire 7 — field-os: clarify ONE Klyfton brain/DOCTRINE block** ✅ Pass 190 (GraphRAG assembly comments; no logic/number change) for readability (no new
   claims, no number changes). *Why:* maintainability. *Check needed:* a confusing block.
   *Done:* `node -c api/klyfton.js` parses; `doctrine_reconcile.py` still ✓ in sync.
 
