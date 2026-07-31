@@ -19,8 +19,10 @@ import re
 import subprocess
 import sys
 
+# \s* between </loc> and <lastmod> so a pretty-printed (line-broken/indented)
+# sitemap still matches, not just the compact one-line form.
 LOC_RE = re.compile(
-    r'(<loc>https://www\.machinegunsprayfoam\.com/([^<]*)</loc><lastmod>)([^<]+)(</lastmod>)'
+    r'(<loc>https://www\.machinegunsprayfoam\.com/([^<]*)</loc>\s*<lastmod>)([^<]+)(</lastmod>)'
 )
 
 
@@ -46,7 +48,7 @@ def main():
         print("ERROR: run from the repo root (sitemap.xml not found here)", file=sys.stderr)
         return 2
 
-    src = open(sitemap).read()
+    src = open(sitemap, encoding="utf-8").read()
     drift = []
 
     def repl(m):
@@ -73,7 +75,7 @@ def main():
         return 0
 
     if drift:
-        open(sitemap, "w").write(out)
+        open(sitemap, "w", encoding="utf-8").write(out)
         print("Updated %d lastmod entries." % len(drift))
     else:
         print("Already in sync (0 changed).")

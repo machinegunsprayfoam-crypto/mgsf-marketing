@@ -62,7 +62,7 @@ def main():
     ld_total = 0
     descs = {}  # meta description -> [pages], for the duplicate check (indexable pages only)
     for f in pages:
-        t = open(f).read()
+        t = open(f, encoding="utf-8").read()
 
         # 1. JSON-LD validity
         blocks = LD_RE.findall(t)
