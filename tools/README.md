@@ -13,7 +13,10 @@ Verifies the things that must stay green before the site goes live:
 - every indexable page has a `<link rel="canonical">` and a `<meta name="robots">`
   (`404.html`, `privacy.html`, `terms.html` are exempt — they're noindex),
 - every **FAQPage** entry's schema text exactly matches the visible FAQ copy on the
-  page (Google requires an exact match, or the rich result is dropped).
+  page (Google requires an exact match, or the rich result is dropped),
+- **OpenGraph consistency** — where a page uses `og:` tags, `og:url` equals the
+  canonical URL and every `og:image` points to a file that exists on disk (a wrong
+  share URL or a renamed image silently breaks link previews).
 
 ```bash
 python3 tools/qa_check.py      # prints PASS/FAIL; exit 0 = clean, 1 = issues found

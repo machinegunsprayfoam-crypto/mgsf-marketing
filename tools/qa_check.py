@@ -9,6 +9,9 @@ Runs the checks that must stay green before deploy:
   4. FAQPage schema == visible text: each Question/Answer in a FAQPage block
      matches the page's visible <details><summary>/<p> or <h3>/<p> copy
      (rendered, tag-stripped, entity-decoded) — Google's exact-match requirement.
+  5. OpenGraph consistency: where a page uses og: tags, og:url must equal the
+     canonical URL and every og:image must point to a file that exists on disk
+     (a wrong share URL or a renamed image silently breaks link previews).
 
 Usage (run from the repo root, i.e. the folder containing the .html files):
   python3 tools/qa_check.py
@@ -27,6 +30,9 @@ HREF_RE = re.compile(r'href="(/[^"#?]*)"')
 DETAILS_RE = re.compile(r'<details><summary>(.*?)</summary>\s*<p[^>]*>(.*?)</p>\s*</details>', re.S)
 # question text holds no tags; [^<]* keeps a match from spanning across sibling <h3> blocks
 H3_RE = re.compile(r'<h3>([^<]*)</h3>\s*<p[^>]*>(.*?)</p>', re.S)
+CANON_RE = re.compile(r'<link rel="canonical" href="([^"]*)"')
+OG_URL_RE = re.compile(r'property="og:url" content="([^"]*)"')
+OG_IMG_RE = re.compile(r'property="og:image" content="([^"]*)"')
 NOINDEX_OK = {"404.html", "privacy.html", "terms.html"}
 
 
@@ -92,13 +98,24 @@ def main():
                 if vis.get(qn) != an:
                     fails.append("[%s] FAQ schema/visible mismatch: %s" % (f, qn[:60]))
 
+        # 5. OpenGraph consistency (only where og: is used; utility pages exempt)
+        if f not in NOINDEX_OK:
+            canon_m = CANON_RE.search(t)
+            ogurl_m = OG_URL_RE.search(t)
+            if ogurl_m and canon_m and ogurl_m.group(1) != canon_m.group(1):
+                fails.append("[%s] og:url != canonical: %s vs %s" % (f, ogurl_m.group(1), canon_m.group(1)))
+            for im in OG_IMG_RE.findall(t):
+                local = re.sub(r"^https?://[^/]+", "", im).lstrip("/")
+                if local and not os.path.exists(local):
+                    fails.append("[%s] og:image file missing: %s" % (f, im))
+
     print("Checked %d pages, %d JSON-LD blocks." % (len(pages), ld_total))
     if fails:
         print("FAIL — %d issue(s):" % len(fails))
         for x in fails:
             print("  " + x)
         return 1
-    print("PASS — JSON-LD valid, links resolve, canonical+robots present, FAQ schema matches visible.")
+    print("PASS — JSON-LD valid, links resolve, canonical+robots present, FAQ schema matches visible, OG consistent.")
     return 0
 
 
