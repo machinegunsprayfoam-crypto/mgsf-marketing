@@ -35,20 +35,20 @@ does repo work; it never schedules business work/meetings/reminders).
   never guess. *Why:* faster, correct social link previews. *Check needed:* `grep -L
   og:image:width` → missing. *Done:* dims equal the actual file; gate clean.
 
-- [ ] **Fire 3 — Lazy-load below-the-fold images.** Add `loading="lazy" decoding="async"` to
+- [~] **Fire 3 — Lazy-load below-the-fold images.** N/A (Pass 189) — already done: all below-fold gallery imgs have `loading="lazy" decoding="async"`; the only eager imgs are heroes (`fetchpriority="high"` LCP) + logo, which must stay eager. Add `loading="lazy" decoding="async"` to
   `<img>` that are NOT the hero/first image on each page (never lazy the hero). *Why:* only
   5/40 pages lazy-load. *Check needed:* per-page first `<img>` left eager. *Done:* hero
   untouched; others lazy; gate clean.
 
-- [ ] **Fire 4 — Explicit `width`/`height` on `<img>` lacking them.** *Why:* cuts layout
+- [~] **Fire 4 — Explicit `width`/`height` on `<img>` lacking them.** N/A (Pass 189) — audited: 0 imgs missing width/height. *Why:* cuts layout
   shift (CLS). *Check needed:* `grep '<img'` without both attrs. *Done:* dims from the real
   files; no visual change; gate clean.
 
-- [ ] **Fire 5 — `aria-label` on icon-only links** (e.g. the ✉ / ☎ header links whose text
+- [~] **Fire 5 — `aria-label` on icon-only links** N/A (Pass 189) — audited: 0 icon-only links; all icon links (📞/✉/📍) carry visible text, and the nav toggle already has aria-label. (e.g. the ✉ / ☎ header links whose text
   is just a glyph). *Why:* screen-reader a11y. *Check needed:* icon links with no accessible
   name. *Done:* labels added; no visual change; gate clean.
 
-- [ ] **Fire 6 — field-os: deepen tests for a thin pure module** (e.g. `dew-point` /
+- [x] **Fire 6 — field-os: deepen tests for a thin pure module** ✅ Pass 189 (dew-point spray-safety flag + margin; +18 checks) (e.g. `dew-point` /
   `measure` edge cases beyond calc-invariants). *Why:* safety-relevant math regression net.
   *Check needed:* module's edge cases uncovered. *Done:* new tests green; `run-all.js` green.
 
