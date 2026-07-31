@@ -12,6 +12,9 @@ Runs the checks that must stay green before deploy:
   5. OpenGraph consistency: where a page uses og: tags, og:url must equal the
      canonical URL and every og:image must point to a file that exists on disk
      (a wrong share URL or a renamed image silently breaks link previews).
+  6. Title + meta description: every page has a non-empty <title>; every indexable
+     page has a <meta name="description">, and no two indexable pages share the same
+     description text (missing/duplicate descriptions hurt search rankings).
 
 Usage (run from the repo root, i.e. the folder containing the .html files):
   python3 tools/qa_check.py
@@ -33,6 +36,8 @@ H3_RE = re.compile(r'<h3>([^<]*)</h3>\s*<p[^>]*>(.*?)</p>', re.S)
 CANON_RE = re.compile(r'<link rel="canonical" href="([^"]*)"')
 OG_URL_RE = re.compile(r'property="og:url" content="([^"]*)"')
 OG_IMG_RE = re.compile(r'property="og:image" content="([^"]*)"')
+TITLE_RE = re.compile(r'<title>(.*?)</title>', re.S | re.I)
+DESC_RE = re.compile(r'<meta name="description" content="([^"]*)"', re.I)
 NOINDEX_OK = {"404.html", "privacy.html", "terms.html"}
 
 
@@ -55,6 +60,7 @@ def main():
         return 2
 
     ld_total = 0
+    descs = {}  # meta description -> [pages], for the duplicate check (indexable pages only)
     for f in pages:
         t = open(f).read()
 
@@ -109,13 +115,29 @@ def main():
                 if local and not os.path.exists(local):
                     fails.append("[%s] og:image file missing: %s" % (f, im))
 
+        # 6. title + meta description present (indexable pages); collect for dup check
+        tm = TITLE_RE.search(t)
+        if not tm or not norm(tm.group(1)):
+            fails.append("[%s] missing/empty <title>" % f)
+        if f not in NOINDEX_OK:
+            dm = DESC_RE.search(t)
+            if not dm or not dm.group(1).strip():
+                fails.append("[%s] missing meta description" % f)
+            else:
+                descs.setdefault(norm(dm.group(1)), []).append(f)
+
+    # 6b. no two indexable pages share the same meta description (dilutes SEO)
+    for d, fs in descs.items():
+        if len(fs) > 1:
+            fails.append("duplicate meta description on %s: \"%s\"" % (", ".join(sorted(fs)), d[:60]))
+
     print("Checked %d pages, %d JSON-LD blocks." % (len(pages), ld_total))
     if fails:
         print("FAIL — %d issue(s):" % len(fails))
         for x in fails:
             print("  " + x)
         return 1
-    print("PASS — JSON-LD valid, links resolve, canonical+robots present, FAQ schema matches visible, OG consistent.")
+    print("PASS — JSON-LD valid, links resolve, canonical+robots present, FAQ schema matches visible, OG consistent, titles+descriptions unique.")
     return 0
 
 

@@ -16,7 +16,10 @@ Verifies the things that must stay green before the site goes live:
   page (Google requires an exact match, or the rich result is dropped),
 - **OpenGraph consistency** — where a page uses `og:` tags, `og:url` equals the
   canonical URL and every `og:image` points to a file that exists on disk (a wrong
-  share URL or a renamed image silently breaks link previews).
+  share URL or a renamed image silently breaks link previews),
+- **title + meta description** — every page has a non-empty `<title>`; every indexable
+  page has a `<meta name="description">`, and no two indexable pages share the same
+  description text (missing/duplicate descriptions hurt search rankings).
 
 ```bash
 python3 tools/qa_check.py      # prints PASS/FAIL; exit 0 = clean, 1 = issues found
