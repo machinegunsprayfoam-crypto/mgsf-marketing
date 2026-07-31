@@ -69,14 +69,24 @@ function buildContactProperties(body) {
 }
 
 function token() {
-  return (process.env.HUBSPOT_TOKEN || process.env.HUBSPOT_API_KEY || "").trim();
+  // Env var NAMES are case-sensitive on Vercel, and the token may be set with any casing
+  // (e.g. HubSpot_Token vs HUBSPOT_TOKEN). Match either canonical name case-insensitively
+  // so the exact capitalization can never silently leave the endpoint unconfigured.
+  var env = process.env || {};
+  for (var k in env) {
+    if (/^hubspot_token$/i.test(k) || /^hubspot_api_key$/i.test(k)) {
+      var v = String(env[k] || "").trim();
+      if (v) return v;
+    }
+  }
+  return "";
 }
 function isConfigured() { return !!token(); }
 
 // GET returns a presence-only config check (NEVER the token value) so the wiring can be
 // verified from a browser or a server-side fetch without exposing the secret. If this
-// reports configured:false after you set the var, the var name is wrong (must be exactly
-// HUBSPOT_TOKEN) or a redeploy hasn't happened yet.
+// reports configured:false after you set the var, the var name doesn't match
+// HUBSPOT_TOKEN / HubSpot_Token (any casing) or a redeploy hasn't happened yet.
 function diagnostic() {
   return {
     ok: true,

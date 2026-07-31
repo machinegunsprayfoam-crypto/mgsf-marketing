@@ -42,28 +42,31 @@ ok("no phone ⇒ invalid", I.validateIntake({ name: "Cliff" }).ok === false);
   ok("payload never fabricates missing detail", /\(none\)/.test(I.buildContactProperties({ name: "A B", phone: "4069398301" }).message));
 })();
 
-// ---- gating ----
-ok("isConfigured false without token", (() => {
-  const t = process.env.HUBSPOT_TOKEN, k = process.env.HUBSPOT_API_KEY;
-  delete process.env.HUBSPOT_TOKEN; delete process.env.HUBSPOT_API_KEY;
-  const r = I.isConfigured();
-  if (t !== undefined) process.env.HUBSPOT_TOKEN = t; if (k !== undefined) process.env.HUBSPOT_API_KEY = k;
-  return r === false;
-})());
+// ---- gating (token lookup is case-insensitive by var NAME) ----
+// Snapshot + clear every casing so the sandbox env can't taint these checks.
+function withCleanTokenEnv(fn) {
+  const saved = {};
+  for (const k of Object.keys(process.env)) {
+    if (/^hubspot_token$/i.test(k) || /^hubspot_api_key$/i.test(k)) { saved[k] = process.env[k]; delete process.env[k]; }
+  }
+  try { return fn(); } finally { for (const k of Object.keys(saved)) process.env[k] = saved[k]; }
+}
+ok("isConfigured false without any token var", withCleanTokenEnv(() => I.isConfigured() === false));
+ok("isConfigured true with UPPER HUBSPOT_TOKEN", withCleanTokenEnv(() => { process.env.HUBSPOT_TOKEN = "pat-x"; const r = I.isConfigured(); delete process.env.HUBSPOT_TOKEN; return r === true; }));
+ok("isConfigured true with mixed-case HubSpot_Token", withCleanTokenEnv(() => { process.env.HubSpot_Token = "pat-x"; const r = I.isConfigured(); delete process.env.HubSpot_Token; return r === true; }));
+ok("isConfigured true with HUBSPOT_API_KEY fallback", withCleanTokenEnv(() => { process.env.HUBSPOT_API_KEY = "pat-x"; const r = I.isConfigured(); delete process.env.HUBSPOT_API_KEY; return r === true; }));
+ok("blank token value ⇒ not configured", withCleanTokenEnv(() => { process.env.HubSpot_Token = "   "; const r = I.isConfigured(); delete process.env.HubSpot_Token; return r === false; }));
 
 // ---- GET diagnostic: presence-only, never leaks the token value ----
-(() => {
-  const t = process.env.HUBSPOT_TOKEN, k = process.env.HUBSPOT_API_KEY;
-  delete process.env.HUBSPOT_TOKEN; delete process.env.HUBSPOT_API_KEY;
+withCleanTokenEnv(() => {
   const off = I.diagnostic();
-  process.env.HUBSPOT_TOKEN = "pat-na1-secret";
+  process.env.HubSpot_Token = "pat-na1-secret";
   const on = I.diagnostic();
-  if (t !== undefined) process.env.HUBSPOT_TOKEN = t; else delete process.env.HUBSPOT_TOKEN;
-  if (k !== undefined) process.env.HUBSPOT_API_KEY = k;
+  delete process.env.HubSpot_Token;
   ok("diagnostic ok + configured=false without token", off.ok === true && off.configured === false);
-  ok("diagnostic configured=true with token", on.configured === true);
+  ok("diagnostic configured=true with mixed-case token", on.configured === true);
   ok("diagnostic never includes the token value", JSON.stringify(on).indexOf("pat-na1-secret") === -1);
-})();
+});
 
 // ---- length caps (defense) ----
 ok("message capped at limit", I.buildContactProperties({ name: "A B", phone: "4069398301", message: "x".repeat(5000) }).message.length <= I._LIMITS.message);
