@@ -28,7 +28,7 @@ _Last updated: 2026-07-31 (Pass 184 / interactive)._
 ## 🟢 Autonomous — safe to do unattended
 | Task | Where | Status |
 |---|---|---|
-| One bounded, safe repo improvement per cron fire | cron | ongoing (mgsf-overnight-ops) |
+| One bounded, safe repo improvement per cron fire | cron | ongoing — **pull the next item from `FIRE_SCHEDULE.md`** |
 | Keep this planner + NIGHT_LOG current | either | ongoing |
 | Refresh `GAP_AUDIT.md` from live data | interactive | as needed (cron can't — needs connectors) |
 | InfraNodus topical corpus | interactive | **on hold** — no lead-message text yet; revisit once web leads accumulate |
