@@ -52,7 +52,8 @@ anywhere Python 3 is available (local shell or a CI runner).
 
 ## `verify_all.sh` — one-command pre-push check
 
-Runs the sitemap-drift check + the QA gate together and reports one result.
+Runs the sitemap-drift check + the QA gate + the `api/intake.js` logic tests
+(`test_intake.js`, when Node is present) together and reports one result.
 
 ```bash
 bash tools/verify_all.sh      # exit 0 only if everything is clean — gate commits/deploys on it
