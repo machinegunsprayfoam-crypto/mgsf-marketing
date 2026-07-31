@@ -63,7 +63,7 @@ does repo work; it never schedules business work/meetings/reminders).
 - [x] **Fire 9 — field-os: cover bpi-calc decision/formula logic** ✅ Pass 192 (tightness bands + ASHRAE 62.2 target + conversions; +19 checks). Found by re-checking: calc-invariants tested only the ACH50 identity, not the customer-facing decision logic — a real gap, not padding.
 
 **Decision-logic test track (verify-needed each fire — only add if genuinely uncovered):**
-- [ ] `roi.js` — payback / net-over-horizon decision logic (check vs calc-invariants first).
+- [x] `roi.js` — ✅ Pass 193: covered the financing cash-flow decision + clamps (+21 checks). calc-invariants had only the identities.
 - [ ] `measure.js` — takeoff/measurement edge cases (check coverage first).
 - Rule: read the module + its calc-invariants coverage; add a suite ONLY if decision/formula
   logic is uncovered (like dew-point Fire 6 / bpi-calc Fire 9). If already covered → N/A, idle.
