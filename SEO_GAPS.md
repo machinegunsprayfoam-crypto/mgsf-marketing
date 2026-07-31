@@ -1,5 +1,16 @@
 # MGSF SEO Content-Gap Report
 
+> **STATUS (2026-07-30, Pass 173): most recommendations are now DONE — this stays as the research record.**
+> - **P1 Crawl Space Encapsulation page — ✅ BUILT** (`/crawl-space-encapsulation`, full page + FAQ + breadcrumb).
+> - **P2 "Free estimate" language — ✅ DONE** (every service + city page carries free-quote/assessment copy; verified Pass 172).
+> - **P3 Open-cell vs closed-cell page — ✅ BUILT** (`/types-of-spray-foam`, with FAQPage schema).
+> - **P4 Concrete ↔ moisture cross-linking — ✅ largely done** (concrete FAQ ties slab/void water to crawl-space + grading; concrete/soil/seawall cluster cross-linked).
+> - **P5 Radiant-barrier coverage — ⬜ still open** (the one unbuilt item; a short honest "radiant barrier vs
+>   foam, when each applies — and why air-sealing + R-value matter more in our cold lane" section on the
+>   attic/crawl page would close it). Owner's call whether to add it.
+>
+> Use `TODO.md`/`MORNING_REVIEW.md` for current status; the analysis below is the original Pass-93 snapshot.
+
 Source: InfraNodus `analyze_google_search_results` on MGSF's core lane terms
 (spray foam insulation montana · closed cell spray foam glendive mt · concrete lifting montana ·
 pole barn insulation · metal building insulation · spray foam roofing · crawl space encapsulation montana).
