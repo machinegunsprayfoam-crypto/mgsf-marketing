@@ -204,8 +204,9 @@
 ]}
 </script>
 <section class="blk" id="quote"><div class="wrap" style="max-width:660px">
-  <div class="sec-head center"><span class="eyebrow">Free quote</span><h2>Tell us about the job</h2><p>Fill this out and it opens a text to us with your details — or just call <a href="tel:+14069398301" style="color:var(--blue);font-weight:700">406-939-8301</a>.</p></div>
+  <div class="sec-head center"><span class="eyebrow">Free quote</span><h2>Tell us about the job</h2><p>Fill this out and we'll get right back to you — or just call <a href="tel:+14069398301" style="color:var(--blue);font-weight:700">406-939-8301</a>.</p></div>
   <form class="quote" id="qform" onsubmit="return sendQuote(event)">
+    <div aria-hidden="true" style="position:absolute;left:-9999px;height:0;overflow:hidden"><label>Company URL<input id="q_hp" name="company_url" tabindex="-1" autocomplete="off"></label></div>
     <div class="grid2">
       <div class="field"><label for="q_name">Your name</label><input id="q_name" required autocomplete="name"></div>
       <div class="field"><label for="q_phone">Phone</label><input id="q_phone" type="tel" required autocomplete="tel"></div>
@@ -216,7 +217,7 @@
     </div>
     <div class="field"><label for="q_msg">What's going on?</label><textarea id="q_msg" placeholder="Cold shop, sweating metal roof, sunken driveway…"></textarea></div>
     <button type="submit" class="btn btn-blue" style="width:100%">Send My Quote Request</button>
-    <div id="done">Thanks — your text is ready to send. If it didn't open, just call <b>406-939-8301</b> and we'll get you squared away.</div>
+    <div id="done">Thanks — we got it. We'll get right back to you. Prefer to talk now? Call <b>406-939-8301</b>.</div>
   </form>
 </div></section>
 
@@ -261,7 +262,7 @@
 </div></footer>
 
 <script>
-function sendQuote(e){e.preventDefault();var g=function(id){return (document.getElementById(id)||{}).value||'';};var body='Spray foam quote request\nName: '+g('q_name')+'\nPhone: '+g('q_phone')+'\nTown: '+g('q_town')+'\nService: '+g('q_svc')+'\nDetails: '+g('q_msg');var sms='sms:+14069398301?&body='+encodeURIComponent(body);document.getElementById('done').style.display='block';try{window.location.href=sms;}catch(err){}return false;}
+function sendQuote(e){e.preventDefault();var g=function(id){return (document.getElementById(id)||{}).value||'';};var payload={name:g('q_name'),phone:g('q_phone'),town:g('q_town'),service:g('q_svc'),message:g('q_msg'),company_url:g('q_hp')};var done=document.getElementById('done');var fallback=function(){var body='Spray foam quote request\nName: '+payload.name+'\nPhone: '+payload.phone+'\nTown: '+payload.town+'\nService: '+payload.service+'\nDetails: '+payload.message;if(done)done.style.display='block';try{window.location.href='sms:+14069398301?&body='+encodeURIComponent(body);}catch(err){}};var ctrl=('AbortController' in window)?new AbortController():null;var timer=ctrl?setTimeout(function(){ctrl.abort();},8000):null;try{fetch('/api/intake',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:ctrl?ctrl.signal:undefined}).then(function(r){return r.ok;}).then(function(good){if(timer)clearTimeout(timer);if(good){if(done)done.style.display='block';var f=document.getElementById('qform');if(f)f.reset();}else{fallback();}}).catch(function(){if(timer)clearTimeout(timer);fallback();});}catch(err){fallback();}return false;}
 </script>
 </body>
 </html>
