@@ -10,10 +10,14 @@
 // reason:"not_configured"} so the form falls back to call/text and no lead is lost.
 // No npm — plain global fetch (Vercel Node 18+). Pure helpers are exported for tests.
 
-var LIMITS = { name: 120, phone: 40, town: 120, service: 80, message: 2000 };
+var LIMITS = { name: 120, phone: 40, town: 120, service: 80, message: 2000, email: 120 };
 
 function clamp(v, n) { return String(v == null ? "" : v).trim().slice(0, n); }
 function digits(phone) { return (String(phone || "").match(/\d/g) || []).join(""); }
+
+// Loose email sanity. Email is OPTIONAL on the form; only set the property when the value
+// actually looks like an address, so a blank/garbage entry never creates a bad contact.
+function validEmail(v) { var e = clamp(v, LIMITS.email); return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) ? e : ""; }
 
 // A hidden field real users never see; if a bot fills it, silently drop the submission.
 function isHoneypot(body) { return !!(body && body.company_url && String(body.company_url).trim()); }
@@ -65,6 +69,8 @@ function buildContactProperties(body) {
   if (nm.lastname) props.lastname = nm.lastname;
   if (loc.city) props.city = loc.city;
   if (loc.state) props.state = loc.state;
+  var email = validEmail(body.email);
+  if (email) props.email = email; // enables HubSpot dedup + emailing a proposal back
   return props;
 }
 
@@ -104,6 +110,11 @@ async function createHubspotContact(props) {
   });
   var data = null;
   try { data = await resp.json(); } catch (e) { data = null; }
+  if (resp.status === 409) {
+    // Contact already exists (HubSpot dedups by email) — a returning lead, not a failure.
+    // Treat as success so the form confirms instead of falling back to call/text.
+    return { ok: true, duplicate: true };
+  }
   if (!resp.ok) {
     return { ok: false, reason: "hubspot_error", status: resp.status,
       detail: (data && (data.message || data.category)) || ("http_" + resp.status) };
@@ -144,6 +155,7 @@ module.exports.parseName = parseName;
 module.exports.parseTown = parseTown;
 module.exports.validateIntake = validateIntake;
 module.exports.buildContactProperties = buildContactProperties;
+module.exports.validEmail = validEmail;
 module.exports.isConfigured = isConfigured;
 module.exports.diagnostic = diagnostic;
 module.exports._LIMITS = LIMITS;
