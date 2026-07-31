@@ -83,14 +83,15 @@ These are owner-gated env switches + a redeploy. `/api/health` (the Mechanic) re
 
 ---
 
-## 5. InfraNodus corpus readiness
+## 5. InfraNodus topical / SEO gap pass — PENDING (rate-limited)
 
-InfraNodus needs a body of topical text. Right now that corpus is **thin**:
-- Web-form lead messages: **none yet** (intake just went live).
-- The 333 imported contacts carry **no inquiry text** (bulk import).
-- Deals are **Jobber-synced names/refs**, not narrative notes.
+**Status:** ⏳ **PENDING — InfraNodus account rate-limited (429) across 3 attempts** (2026-07-31). Every call — `analyze_google_search_results` on our 8 core queries + `generate_content_gaps` on the live spray-foam page — hit the shared "requests every 15 minutes" cap and never returned. **Re-run when the quota frees** (a quiet interactive session); the queries and the extracted site corpus are ready to go, so it's a one-shot when the limit lifts.
 
-**Recommendation:** don't run InfraNodus on HubSpot yet — there's nothing meaningful to analyze. It becomes valuable once real web-form leads accumulate (their "What's going on?" messages) or once won/lost deal notes are captured. When ready, I'll extract a **de-identified** corpus (names/emails/phones stripped — never commit customer PII to the repo) and feed it in.
+**What's queued (ready to run):**
+- **Market gaps:** `analyze_google_search_results` on — spray foam cost · closed vs open cell · metal-building foam · SPF roof vs replacement · concrete leveling vs mudjacking · is spray foam worth it · spray foam Montana · attic foam problems.
+- **Our-content gaps:** `generate_content_gaps` on `mgsf-marketing.vercel.app/spray-foam-insulation` (or feed the extracted 26-page corpus, 753 unique lines).
+
+**Note on scope (unchanged):** InfraNodus is a topical text analyzer, not a CRM hook. The HubSpot corpus is still thin (no web-lead message text yet), so the valuable input is the **site copy + SERP results** (queued above), not HubSpot. When run, replace this section with the actual topical gaps + a short SEO to-do.
 
 ---
 
