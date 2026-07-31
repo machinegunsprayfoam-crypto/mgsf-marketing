@@ -1,6 +1,6 @@
 # MGSF Cross-App Gap Audit
 
-**Generated:** 2026-07-31 (interactive session, live data) · **Owner:** Clifton
+**Generated:** 2026-07-31 · **Refreshed:** 2026-07-31 (interactive, live data — post-merge) · **Owner:** Clifton
 **Scope:** HubSpot, GitHub (mgsf-field-os + mgsf-marketing), Klyfton app, connected apps.
 
 > **How this was produced & why it's not a cron job:** the findings below come from
@@ -8,11 +8,10 @@
 > sessions have **no connectors**, so this audit can only be refreshed from an interactive
 > session — not autonomously overnight. Re-run the same checks in a live session to update.
 >
-> **InfraNodus:** requested, but its MCP server is disconnected this session. It is a
-> text-network *gap analyzer*, not a CRM integration — it can't "hook into" HubSpot live.
-> Its real use is topical: feed it lead-message / deal-note text to surface conversation
-> blind spots. See "InfraNodus corpus readiness" below — right now the corpus is too thin
-> to be worth running (no web-form lead text yet).
+> **What changed on this refresh:** PRs **#72, #73, #75 merged** (memory persistence, 5 new
+> modules, honest memory status) — field-os is on newest code. Only **2 stale draft PRs**
+> (#71, #74) remain open. Exact branch cleanup list is now in **`PRUNE_LIST.md`** (say `prune`).
+> HubSpot counts **unchanged** (333 / 70 owned / 8 deals / 0 web leads — expected, DNS not live).
 
 ---
 
@@ -42,21 +41,20 @@
 
 **mgsf-field-os**
 - ⚠️ **`main` is UNPROTECTED** — direct pushes and force-pushes to the production branch are allowed.
-- ⚠️ **25 branches, 22 are stale `copilot/*`** experiments (`fix-whatevers-broken`, `have-done-everything`, `fix-all-problems`, `supabase-problems`, …) — dead clutter.
-- **4 open PRs:**
-  - **#73** — "5 new modules (orchestrator, provider hub, lead-score, health, redact)" — ready, CI green (GitGuardian false-positive aside).
-  - **#72** — "Fix semantic memory persistence" — **open, overlaps #73's memory work** → possible conflict; needs a decide-and-close.
-  - **#74** — "Resolving issues in the project" — draft, stale.
-  - **#71** — "Restore Vercel cron execution…" — draft, stale (last touched 07-24).
+- ⚠️ **25 branches; 21 are deletable clutter** (18 dead `copilot/*` experiments + 3 already-merged branches). Exact list + delete commands in **`PRUNE_LIST.md`**.
+- **2 open PRs left (both stale drafts):**
+  - **#74** — "Resolving issues in the project" — draft, stale (07-31). Head: `copilot/fix-all-problems`.
+  - **#71** — "Restore Vercel cron execution…" — draft, stale (07-24). Head: `copilot/mgsf-field-os-70-fix-vercel-issue`.
+  - ✅ **#73, #72, #75 all MERGED 2026-07-31** (5 modules, memory persistence, honest memory status) — the #72-vs-#73 overlap flagged earlier is resolved (both landed cleanly).
 
 **mgsf-marketing**
 - ⚠️ **`main` is UNPROTECTED** (same as above).
-- Branches clean (main + this working branch + a Vercel analytics branch). PRs #2 and #4 merged.
+- 3 branches: `main`, this working branch, and `vercel/install-vercel-web-analytics-5iq6ly` (verify Analytics is live on main, then deletable). PRs #2, #4, #5 merged (lead capture live).
 
 **Owner actions (hard-to-undo — need your OK on the list):**
 1. **Protect `main`** on both repos (require PR before merge). Do it in GitHub → Settings → Branches (no MCP tool for this; ~2 min each).
-2. **Prune the 22 stale `copilot/*` branches** — I'll produce the exact delete list for your one-tap OK before removing anything.
-3. **Triage the open PRs:** merge/close #73, resolve **#72 vs #73** overlap, close the two stale drafts (#71, #74).
+2. **Prune the 21 stale/merged field-os branches** — full verified list ready in `PRUNE_LIST.md`; say **`prune`** and I delete the SAFE set (keeps the 2 branches backing open drafts).
+3. **Triage the 2 stale drafts** (#71, #74): close if superseded → their branches then join the safe-delete set.
 
 ---
 
@@ -64,7 +62,7 @@
 
 | Subsystem | State | Switch to turn on |
 |---|---|---|
-| Memory (semantic recall) | **OFF** | `OPENAI_API_KEY` (exact name — the `open_ai` misnaming is the blocker) + run the pgvector SQL once |
+| Memory (semantic recall) | ✅ **ON — verified live** | pgvector schema applied + 32/32 notes backfilled + semantic recall proven (2026-07-31). Status now honest (`schemaReady` probe). No action needed. |
 | Arms (email/SMS/CRM exec) | OFF | `ALERTS_WEBHOOK_URL` |
 | ATS (budget throttle) | OFF | `KLYFTON_MONTHLY_BUDGET_USD` |
 | Maps / drive-distance | OFF | `GOOGLE_MAPS_API_KEY` (mobilization math works keyless) |
@@ -80,7 +78,8 @@ These are owner-gated env switches + a redeploy. `/api/health` (the Mechanic) re
 - **Slack = only `#general`** → no `#leads` / `#alerts` / `#field` for Klyfton to post to.
 - **Twilio unauthed** → missed-call-recovery texts off.
 - **QuickBooks writes blocked** (subscription) → can read P&L/AR, can't push invoices.
-- **Disconnected this session** (need re-auth in connector settings): **InfraNodus**, Apollo, Supabase-MCP, plus the standing list (Stripe, PandaDoc, Sentry, cloudinary, Adobe…).
+- **Connected this refresh:** HubSpot, GitHub, Vercel, Supabase, InfraNodus (InfraNodus hit its 15-min rate cap mid-run — retrying; results land in §5).
+- **Need re-auth in connector settings:** PandaDoc, Sentry, Adobe Experience Manager, plus the standing list (Stripe, Twilio, cloudinary…).
 
 ---
 
