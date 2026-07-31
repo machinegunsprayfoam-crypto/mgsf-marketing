@@ -23,7 +23,7 @@ does repo work; it never schedules business work/meetings/reminders).
 
 ## Queue (highest value first)
 
-- [ ] **Fire 1 — Security headers in `vercel.json`** (marketing). Add a `headers` block:
+- [x] **Fire 1 — Security headers in `vercel.json`** ✅ Pass 187 (marketing). Add a `headers` block:
   `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`,
   `X-Frame-Options: SAMEORIGIN`, `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
   *Why:* real, safe hardening; site has none today. *Check needed:* `grep headers vercel.json`
