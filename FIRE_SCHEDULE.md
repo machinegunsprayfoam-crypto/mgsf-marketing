@@ -30,7 +30,7 @@ does repo work; it never schedules business work/meetings/reminders).
   → absent. *Done:* valid JSON (`node -e "JSON.parse(require('fs').readFileSync('vercel.json'))"`),
   cleanUrls/existing config preserved, gate clean.
 
-- [ ] **Fire 2 — `og:image:width` + `og:image:height`** on all indexable pages. Read the
+- [x] **Fire 2 — `og:image:width` + `og:image:height`** ✅ Pass 188 on all indexable pages. Read the
   **real** pixel dimensions of the og:image asset (`file`/`identify` on the file in `img/`),
   never guess. *Why:* faster, correct social link previews. *Check needed:* `grep -L
   og:image:width` → missing. *Done:* dims equal the actual file; gate clean.
