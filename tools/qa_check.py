@@ -38,6 +38,7 @@ OG_URL_RE = re.compile(r'property="og:url" content="([^"]*)"')
 OG_IMG_RE = re.compile(r'property="og:image" content="([^"]*)"')
 TITLE_RE = re.compile(r'<title>(.*?)</title>', re.S | re.I)
 DESC_RE = re.compile(r'<meta name="description" content="([^"]*)"', re.I)
+ROBOTS_RE = re.compile(r'<meta name="robots" content="([^"]*)"', re.I)
 NOINDEX_OK = {"404.html", "privacy.html", "terms.html"}
 SITE = "https://www.machinegunsprayfoam.com"
 
@@ -95,8 +96,21 @@ def main():
                 want = expected_canon(f)
                 if cm.group(1).rstrip("/") != want.rstrip("/"):
                     fails.append("[%s] canonical does not self-reference: %s (expected %s)" % (f, cm.group(1), want))
-            if 'name="robots"' not in t:
-                fails.append("[%s] missing robots meta" % f)
+
+        # 3b. robots directive VALUE (not just presence): an indexable page accidentally flipped
+        #     to "noindex" silently drops from search; a utility page that loses "noindex" gets
+        #     indexed when it shouldn't. Check the actual directive both ways.
+        rm = ROBOTS_RE.search(t)
+        if not rm:
+            fails.append("[%s] missing robots meta" % f)
+        else:
+            robots = rm.group(1).lower()
+            if f in NOINDEX_OK:
+                if "noindex" not in robots:
+                    fails.append("[%s] utility page should be noindex: robots=\"%s\"" % (f, rm.group(1)))
+            else:
+                if "noindex" in robots:
+                    fails.append("[%s] indexable page is marked noindex: robots=\"%s\"" % (f, rm.group(1)))
 
         # 4. FAQPage schema == visible
         vis = {}
@@ -164,7 +178,7 @@ def main():
         for x in fails:
             print("  " + x)
         return 1
-    print("PASS — JSON-LD valid, links resolve, canonical self-references, robots present, FAQ schema matches visible, OG consistent, titles+descriptions unique, sitemap complete.")
+    print("PASS — JSON-LD valid, links resolve, canonical self-references, robots directive correct, FAQ schema matches visible, OG consistent, titles+descriptions unique, sitemap complete.")
     return 0
 
 
