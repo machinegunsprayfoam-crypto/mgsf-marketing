@@ -39,6 +39,12 @@ OG_IMG_RE = re.compile(r'property="og:image" content="([^"]*)"')
 TITLE_RE = re.compile(r'<title>(.*?)</title>', re.S | re.I)
 DESC_RE = re.compile(r'<meta name="description" content="([^"]*)"', re.I)
 NOINDEX_OK = {"404.html", "privacy.html", "terms.html"}
+SITE = "https://www.machinegunsprayfoam.com"
+
+
+def expected_canon(f):
+    """The clean canonical URL a page should point at itself: index → site root, else /<slug>."""
+    return SITE + "/" if f == "index.html" else SITE + "/" + f[:-len(".html")]
 
 
 def norm(s):
@@ -78,10 +84,17 @@ def main():
             if not os.path.exists(url_to_file(href)) and not os.path.exists(href.strip("/")):
                 fails.append("[%s] broken internal link: %s" % (f, href))
 
-        # 3. canonical + robots
+        # 3. canonical + robots (canonical must SELF-REFERENCE — a canonical pointing at the
+        #    wrong URL silently de-indexes the page in favor of another, and merely checking
+        #    presence would never catch it)
         if f not in NOINDEX_OK:
-            if '<link rel="canonical"' not in t:
+            cm = CANON_RE.search(t)
+            if not cm:
                 fails.append("[%s] missing canonical" % f)
+            else:
+                want = expected_canon(f)
+                if cm.group(1).rstrip("/") != want.rstrip("/"):
+                    fails.append("[%s] canonical does not self-reference: %s (expected %s)" % (f, cm.group(1), want))
             if 'name="robots"' not in t:
                 fails.append("[%s] missing robots meta" % f)
 
@@ -131,13 +144,27 @@ def main():
         if len(fs) > 1:
             fails.append("duplicate meta description on %s: \"%s\"" % (", ".join(sorted(fs)), d[:60]))
 
+    # 7. sitemap completeness: every indexable page is in sitemap.xml, and no noindex page is.
+    #    (sync_sitemap.py keeps lastmod fresh but a NEW page silently missing from the sitemap,
+    #    or a noindex page wrongly listed, would never be flagged by a lastmod-only check.)
+    if os.path.exists("sitemap.xml"):
+        sm = open("sitemap.xml", encoding="utf-8").read()
+        sm_locs = set(re.sub(r"^https?://[^/]+", "", u).rstrip("/") or "/" for u in re.findall(r"<loc>([^<]+)</loc>", sm))
+        for f in pages:
+            path = "/" if f == "index.html" else "/" + f[:-len(".html")]
+            listed = path in sm_locs
+            if f in NOINDEX_OK and listed:
+                fails.append("[sitemap] noindex page wrongly listed: %s" % f)
+            if f not in NOINDEX_OK and not listed:
+                fails.append("[sitemap] indexable page missing from sitemap: %s" % f)
+
     print("Checked %d pages, %d JSON-LD blocks." % (len(pages), ld_total))
     if fails:
         print("FAIL — %d issue(s):" % len(fails))
         for x in fails:
             print("  " + x)
         return 1
-    print("PASS — JSON-LD valid, links resolve, canonical+robots present, FAQ schema matches visible, OG consistent, titles+descriptions unique.")
+    print("PASS — JSON-LD valid, links resolve, canonical self-references, robots present, FAQ schema matches visible, OG consistent, titles+descriptions unique, sitemap complete.")
     return 0
 
 
