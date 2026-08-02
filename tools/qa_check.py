@@ -15,6 +15,8 @@ Runs the checks that must stay green before deploy:
   6. Title + meta description: every page has a non-empty <title>; every indexable
      page has a <meta name="description">, and no two indexable pages share the same
      description text (missing/duplicate descriptions hurt search rankings).
+  7. Image and form UX: images have alt text and intrinsic dimensions, below-the-fold
+     images lazy-load, hero imagery is prioritized, and quote confirmations announce.
 
 Usage (run from the repo root, i.e. the folder containing the .html files):
   python3 tools/qa_check.py
@@ -38,6 +40,7 @@ OG_URL_RE = re.compile(r'property="og:url" content="([^"]*)"')
 OG_IMG_RE = re.compile(r'property="og:image" content="([^"]*)"')
 TITLE_RE = re.compile(r'<title>(.*?)</title>', re.S | re.I)
 DESC_RE = re.compile(r'<meta name="description" content="([^"]*)"', re.I)
+IMG_RE = re.compile(r'<img\b[^>]*>', re.I)
 NOINDEX_OK = {"404.html", "privacy.html", "terms.html"}
 
 
@@ -115,6 +118,20 @@ def main():
                 if local and not os.path.exists(local):
                     fails.append("[%s] og:image file missing: %s" % (f, im))
 
+        # 7. image and quote-form UX: no layout shift or silent form confirmation.
+        for img in IMG_RE.findall(t):
+            if not re.search(r'\balt="[^"]*"', img, re.I):
+                fails.append("[%s] image missing alt text" % f)
+            if not (re.search(r'\bwidth="\d+"', img, re.I) and re.search(r'\bheight="\d+"', img, re.I)):
+                fails.append("[%s] image missing intrinsic dimensions" % f)
+            if "class=\"bg\"" in img and "fetchpriority=\"high\"" not in img:
+                fails.append("[%s] hero image is not prioritized" % f)
+            if "class=\"bg\"" not in img and "class=\"logoimg\"" not in img and \
+                    "loading=\"lazy\"" not in img and "fetchpriority=\"high\"" not in img:
+                fails.append("[%s] non-critical image is not lazy-loaded" % f)
+        if f in {"index.html", "contact.html"} and 'id="done" role="status" aria-live="polite"' not in t:
+            fails.append("[%s] quote confirmation is not announced" % f)
+
         # 6. title + meta description present (indexable pages); collect for dup check
         tm = TITLE_RE.search(t)
         if not tm or not norm(tm.group(1)):
@@ -137,7 +154,7 @@ def main():
         for x in fails:
             print("  " + x)
         return 1
-    print("PASS — JSON-LD valid, links resolve, canonical+robots present, FAQ schema matches visible, OG consistent, titles+descriptions unique.")
+    print("PASS — JSON-LD valid, links resolve, canonical+robots present, FAQ schema matches visible, OG consistent, titles+descriptions unique, image/form UX verified.")
     return 0
 
 
