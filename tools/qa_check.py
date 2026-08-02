@@ -115,6 +115,10 @@ def main():
                 if local and not os.path.exists(local):
                     fails.append("[%s] og:image file missing: %s" % (f, im))
 
+        # 7. Vercel Web Analytics must be wired on every production page.
+        if 'src="js/analytics.js" defer' not in t or 'src="/_vercel/insights/script.js"' not in t:
+            fails.append("[%s] missing Vercel Web Analytics instrumentation" % f)
+
         # 6. title + meta description present (indexable pages); collect for dup check
         tm = TITLE_RE.search(t)
         if not tm or not norm(tm.group(1)):
