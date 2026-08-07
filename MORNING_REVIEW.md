@@ -60,13 +60,17 @@ gate green end to end (**107 suites / 2621 checks**):
 - **Contractor registration #** · **North Dakota phone #** · **Real Google reviews** (none on site; won't invent; `g.page` link untouched) · **Business hours** (only index publishes them) · **Attorney review** of Privacy/Terms · **Real job photos** + logo/hero image optimization (image-heavy pages).
 
 ## 🟢 Decisions waiting on you
-- **Merge the branch to main — the big one.** The whole 8/7 council/cube build (34 specialists, the
-  6-division cube, 14 overlap teams + the 26-piece algebra, 5 new arms, calendar tool, SAM.gov test
-  lock) plus the earlier overnight work (llms.txt, env docs+guard, radiant FAQ, wiring guards) is
-  staged on `claude/klyfton-ai-problems-ynhx9f`, gate green (107/2621), **inert until merged**. Say the
-  word and I'll open the PR / merge so it deploys.
-- **Consensus / "council mode" chat toggle** — built server-side (`/api/consensus`), needs ≥2 free
-  provider keys + a small UI toggle to surface it. Owner-gated on the keys.
+- ✅ **Merged to main (#93, #94, #95) — LIVE.** The council/cube build + the 8/5 doctrine reconcile
+  (R-values 7.0/3.8/6.3, coating mil-spec, measured-yield loop, consensus UI) are deployed. Gate 110/2673.
+- **PRICING / DOCTRINE decisions (owner-only — flagged, not touched):**
+  1. **Roofing product: NCFI 10-011 (R-6.3, 25 psi) vs 10-016 (R-6.7, 58 psi walkable)** — sets the
+     roofing R-value AND whether the roof takes foot traffic. Roofing R stays UNCONFIRMED until you pick.
+  2. **Confirm set invoice prices** (closed ~$4,124, roofing ~$2,550 are back-calculated — one invoice each locks it).
+  3. **Concrete-lifting $10/lb sell rate** prices a 600 SF driveway ~45% light vs the $12/SF market check.
+  4. **Thermal-barrier (DC315) coating has no price** — bid lists it as an exclusion, so every job needing one is a change order. Price it.
+  5. **Manual Drive step:** rename + move `..._Estimating_Workbook_V2.xlsx` into 16_ARCHIVE (connector can't move/rename).
+- **Consensus keys** — the 🤝 Consensus card is live in Owner Tools; needs ≥2 free AI provider keys in Vercel to fan out.
+- **`ALERTS_WEBHOOK_URL`** — still the biggest functional unlock (all 12 arms + automations).
 - **Title tags** — several `<title>`s exceed ~60 chars (Google truncates); say the word and I'll trim keeping front-loaded keywords.
 
 ---
