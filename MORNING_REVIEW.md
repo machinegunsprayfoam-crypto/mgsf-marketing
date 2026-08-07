@@ -1,6 +1,6 @@
 # ☀️ Morning Review — session digest
 
-_Updated 2026-08-02 · through Pass 238 + this session's interactive work · per-pass detail in NIGHT_LOG.md_
+_Updated 2026-08-07 · through Pass 244 + the 8/7 council/cube session · per-pass detail in NIGHT_LOG.md_
 _Branch: `claude/klyfton-ai-problems-ynhx9f`. Overnight work stages here; **PR #78 was merged to `main` this session** so the Klyfton app is live on production with all the new code._
 
 **TL;DR:** The Klyfton app is **built, merged, and running in production** (verified via `/api/boot`). It's **one Vercel setting away from a live crew login**: `CREW_CODE` is set but **not in the Production environment scope**, so the access gate still reads dark. I confirmed it's **not a code bug** — the gate reads `CREW_CODE` correctly, so setting it in Production will flip it. Second-biggest unlock is `ALERTS_WEBHOOK_URL` (turns on ~10 tools + all automations). Everything else left is your-side (auth/clicks) or info only you can give.
@@ -23,6 +23,28 @@ _Branch: `claude/klyfton-ai-problems-ynhx9f`. Overnight work stages here; **PR #
 
 ---
 
+## 🌙 Tonight — the council/cube build (2026-08-07, field-os, staged on branch, NOT merged)
+
+You drove a big restructure this session, then I kept building while you slept. All on the branch,
+gate green end to end (**107 suites / 2621 checks**):
+
+- **Klyfton is now a 6-division "cube" council — 12 → 34 specialists** (was a flat 12-face set). Six
+  divisions (Estimating & Takeoff · Field & Production · Sales & Growth · Finance & Admin · Compliance
+  & Risk · GovCon & Strategy), each with a **lead (center piece)**; genuinely new coverage (equipment,
+  QC, AR/collections, cash-flow, payroll, bookkeeping, contracts/liens, licensing, warranty,
+  capability statements, teaming, owner-strategy). Routing is hierarchical and can't drift from the roster.
+- **Overlap teams (your Rubik's insight).** The 2-color edges & 3-color corners are cross-functional
+  teams that fire in **one turn**: **14 featured plays** (Go/No-Go Bid, Federal Bid Package, Priced-to-Margin,
+  Win-Rate, True Takeoff, Book-to-Capacity, Teaming Outreach, …) + an **algorithm that fills all 26 cube
+  pieces** so every combination has a capability (`/api/combos`).
+- **5 new arms** (send_proposal, request_review, send_payment_link, collections_notice, post_social) —
+  still approval-gated, still inert until `ALERTS_WEBHOOK_URL`.
+- **New/​hardened**: `api/calendar.js` (.ics generator, hard **no-Sunday** rule) + the GovCon SAM.gov
+  lead pipeline is now test-locked (was untested).
+- **Visuals** (private Claude artifacts): the 3D **cube brain-map** (`public/cube-map.html`, in-app under
+  Command Center → Agents) and the earlier dodecahedron. _The cube artifact's last republish hit a
+  transient claude.ai 403; the in-app file is current and will refresh on the next publish._
+
 ## 🔴 Needs YOU (priority order)
 
 1. **`CREW_CODE` → Production scope — THE blocker.** It's set but the live app still reads the access gate as dark, so it's saved to the wrong environment (Preview/Dev) or not to Production. Fix: Vercel → mgsf-fieldos → Settings → Environment Variables → confirm the `CREW_CODE` row shows a **`Production`** tag (value `1775`), then redeploy once. Proven **not** a code bug. _Tell me what that row shows and I'll confirm the fix._
@@ -38,7 +60,13 @@ _Branch: `claude/klyfton-ai-problems-ynhx9f`. Overnight work stages here; **PR #
 - **Contractor registration #** · **North Dakota phone #** · **Real Google reviews** (none on site; won't invent; `g.page` link untouched) · **Business hours** (only index publishes them) · **Attorney review** of Privacy/Terms · **Real job photos** + logo/hero image optimization (image-heavy pages).
 
 ## 🟢 Decisions waiting on you
-- **Merge the branch to main** — overnight work (llms.txt, env docs+guard, radiant FAQ, CLAUDE.md, wiring guards) is staged, inert until merged.
+- **Merge the branch to main — the big one.** The whole 8/7 council/cube build (34 specialists, the
+  6-division cube, 14 overlap teams + the 26-piece algebra, 5 new arms, calendar tool, SAM.gov test
+  lock) plus the earlier overnight work (llms.txt, env docs+guard, radiant FAQ, wiring guards) is
+  staged on `claude/klyfton-ai-problems-ynhx9f`, gate green (107/2621), **inert until merged**. Say the
+  word and I'll open the PR / merge so it deploys.
+- **Consensus / "council mode" chat toggle** — built server-side (`/api/consensus`), needs ≥2 free
+  provider keys + a small UI toggle to surface it. Owner-gated on the keys.
 - **Title tags** — several `<title>`s exceed ~60 chars (Google truncates); say the word and I'll trim keeping front-loaded keywords.
 
 ---
