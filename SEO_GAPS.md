@@ -5,9 +5,10 @@
 > - **P2 "Free estimate" language — ✅ DONE** (every service + city page carries free-quote/assessment copy; verified Pass 172).
 > - **P3 Open-cell vs closed-cell page — ✅ BUILT** (`/types-of-spray-foam`, with FAQPage schema).
 > - **P4 Concrete ↔ moisture cross-linking — ✅ largely done** (concrete FAQ ties slab/void water to crawl-space + grading; concrete/soil/seawall cluster cross-linked).
-> - **P5 Radiant-barrier coverage — ⬜ still open** (the one unbuilt item; a short honest "radiant barrier vs
->   foam, when each applies — and why air-sealing + R-value matter more in our cold lane" section on the
->   attic/crawl page would close it). Owner's call whether to add it.
+> - **P5 Radiant-barrier coverage — ✅ ADDRESSED** (Pass 238). Honest "radiant barrier vs a reflective
+>   cool-roof coating" FAQ added to `/cool-roofs` (its natural home — the reflective-coating page), in
+>   sync with the FAQPage schema; framed with air-sealing + insulation mattering more in our cold lane,
+>   no invented numbers/savings. Existing radiant mentions on `/attic-insulation` + `/crawl-space-encapsulation` remain.
 >
 > Use `TODO.md`/`MORNING_REVIEW.md` for current status; the analysis below is the original Pass-93 snapshot.
 

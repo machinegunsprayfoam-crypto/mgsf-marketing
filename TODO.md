@@ -12,7 +12,7 @@ main. Site is now **`.com`**, one **dark tactical (scarlet & gold)** theme, 40 p
       _(Per `SEO_FINDINGS.md`: unauthenticated Ahrefs free-DR access was set to end 2026-08-10.)_
 
 ## 🔴 Go-live — a decision only you can make
-- [ ] **Point `.com` live** — set `www.machinegunsprayfoam.com` as the Vercel primary domain + DNS.
+- [ ] **Point `.com` live** — *decided (Mon 8/3): `.com` is primary.* Finding: the site is already LIVE on **`www.machinegunsprayfoam.net`** (verified 200), but `.com` is parked (IP 208.91.197.27) and **not attached to any Vercel project**, while every canonical already points at `.com` → SEO split to close. Steps: (1) mgsf-marketing → Settings → Domains → add `machinegunsprayfoam.com` + `www`; (2) set the exact A (apex) + CNAME (`www`→`cname.vercel-dns.com`) records Vercel shows, removing the old parking A record at the registrar; (3) set `.net` + `www.net` to **Redirect → `www.machinegunsprayfoam.com`** (308). Then I fetch `.com` to confirm it serves + run a real test lead through `/api/intake` → confirm in HubSpot. (Repo needs no change — canonicals/sitemap/robots are all `.com` already.)
 - [ ] **Merge to main** — everything is staged on `claude/klyfton-ai-problems-ynhx9f`; inert until you merge.
 - [ ] **`g.pe` → `g.page`** review link — flagged; I won't touch it without your OK.
 - [ ] **Set `CREW_CODE`** in Vercel → locks the Klyfton read endpoints + AI to your crew.
